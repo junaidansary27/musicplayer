@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  
+</head>
+<body>
+    
+  <div class="container">
+    <h2>Music Player</h2>
+    
+    <audio id="audio-player" controls>
+      <source src="song1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="controls">
+      <button id="play-btn" >Play</button>
+      <button id="pause-btn">Pause</button>
+      <button id="prev-btn">Previous</button>
+      <button id="next-btn">Next</button>
+    </div>
+    <div class="Library">
+      <h3>Library</h3>
+      <ul id="Library">
+        <li> 
+            <a href="song1.mp3" id="s1">Thunder</a></li>
+            
+        <li><a href="song2.mp3" id="s2">Safari</a></li>
+        <li><a href="song3.mp3" id="s1">Beliver</a></li>
+      </ul>
+    </div>
+    <div class="volume">
+      <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1">
+    </div>
+  </div>
+  <style>
+  
+    body{
+      
+      background-image:url('https://i.pinimg.com/originals/04/fd/84/04fd846e4aa1d29d6e718b19f8bbf41e.jpg');
+      margin: 0 auto;
+      height: 100px;
+      .container{
+        background-color: aquamarine;
+        margin: 200px auto;
+        max-width: 400px;
+        border-radius: 10px;
+        padding: 50px auto;
+        text-align: center;
+        background-image: url('https://img.freepik.com/free-vector/geometric-pattern-purple-technology-background-with-circles_53876-116189.jpg?size=626&ext=jpg');
+        background-size: cover;
+          }
+          #audio-player{
+            background-color: rgb(44, 156, 68);
+            line-height: 10px;
+            border-radius: 30px;
+            border: chartreuse;
+            margin: 20px;
+            padding-top: 3px;
+            padding-bottom: 5px;
+          }
+          .container button {
+             
+            background-color: rgb(248, 2, 93);
+          
+            border-radius: 10px;
+          }
+         h2{
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          color: #96df21;
+          padding-top: 30px;
+         }
+         a{
+          color: rgb(236, 243, 236);
+         }
+         button:hover{
+          background-color : orange;
+         }
+         .Library{
+          text-align: left;
+          color: rgb(0, 247, 255);
+          padding-left: 30px;
+         }
+         .volume{
+          color: chartreuse;
+        text-align: left;
+        padding-left: 30px;
+         }
+         li{
+          text-align: left;
+          color: rgb(13, 210, 26);
+          list-style-type: none;
+         }
+         .volume input{
+         background-color: darkorange;
+                 }
+              
+                }
+  </style>
+
+  <script >
+        
+        const audioPlayer = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const volumeControl = document.getElementById('volume-control');
+
+        playBtn.addEventListener('click', 
+        playAudio);
+        pauseBtn.addEventListener('click', pauseAudio);
+        prevBtn.addEventListener('click', playPrevious);
+        nextBtn.addEventListener('click', playNext);
+        volumeControl.addEventListener('input', setVolume);
+
+
+function playAudio() {
+  audioPlayer.play();
+}
+
+function pauseAudio() {
+  audioPlayer.pause();
+}
+
+function playNext() {
+  // Update this function to handle playing the next song
+}
+
+function playPrevious() {
+  // Update this function to handle playing the previous song
+}
+
+function setVolume() {
+  audioPlayer.volume = volumeControl.value;
+}
+
+
+const songList = [
+  { title: 'Song 1', url: 'song1.mp3' },
+  { title: 'Song 2', url: 'song2.mp3' },
+  { title: 'Song 3', url: 'song3.mp3' },
+];
+
+let currentSongIndex = 0;
+
+audioPlayer.src = songList[currentSongIndex].url;
+
+function playNext() {
+  currentSongIndex = (currentSongIndex + 1) % songList.length;
+  audioPlayer.src = songList[currentSongIndex].url;
+  audioPlayer.play();
+}
+
+function playPrevious() {
+  currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
+  audioPlayer.src = songList[currentSongIndex].url;
+  audioPlayer.play();
+} 
+const libraryList = document.getElementById('Library');
+
+libraryList.addEventListener('click', (event) => {
+  if (event.target.tagName === 'A') {
+    event.preventDefault();
+    const songTitle = event.target.innerText;
+    alert(`Playing ${songTitle}`);
+  }
+});
+  </script>
+</body>
+</html
